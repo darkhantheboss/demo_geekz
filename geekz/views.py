@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Pair
+from .genom import eaGenerateUpdate
 
 
 class CheckView(APIView):
@@ -97,6 +98,7 @@ class CheckView(APIView):
             c[i] += 1
         ranking = c
         print ranking
+        eaGenerateUpdate(text, 10)
         json_data = open('geekz/dict.json').read()
         data = json.loads(json_data)[random.randint(1, 11)]
         Pair.objects.create(word=data['word'], synonym=data['synonym'])
